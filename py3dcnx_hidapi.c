@@ -1,5 +1,5 @@
 #include "py3dcnx.h"
-#include "hidapi.h"
+#include "hidapi/hidapi.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdint.h>

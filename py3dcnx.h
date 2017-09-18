@@ -1,7 +1,7 @@
 #ifndef _PY3DCNX_H_
 #define _PY3DCNX_H_
 
-#include "hidapi.h"
+#include "hidapi/hidapi.h"
 
 typedef enum {TRANSLATION=1, ROTATION, BUTTON} py3dcnx_event_type;
 

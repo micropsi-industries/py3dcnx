@@ -4,17 +4,19 @@ import sys
 platform = sys.platform
 
 if 'linux' in platform:
-    module1 = Extension('py3dcnx', sources=['py3dcnx.c', 'py3dcnx_hidapi.c'],
-                        libraries=['hidapi-hidraw'])
+    module1 = Extension('py3dcnx', sources=['py3dcnx.c', 'py3dcnx_hidapi.c',
+                                            'hidapi/hid-linux.c'],
+                        libraries=['udev'])
 elif platform == 'darwin':
-    module1 = Extension('py3dcnx', sources=['py3dcnx.c', 'py3dcnx_hidapi.c'],
-                        libraries=['hidapi'])
+    module1 = Extension('py3dcnx', sources=['py3dcnx.c', 'py3dcnx_hidapi.c',
+                                            'hidapi/hid-mac.c'],
+                        extra_link_args=['-framework', 'IOKit', '-framework',
+                                         'CoreFoundation'])
 elif 'win' in platform:
     module1 = Extension('py3dcnx',
-                        sources=['py3dcnx.c', 'py3dcnx_hidapi.c'],
-                        library_dirs=['/usr/local/lib'],
-                        libraries=['hidapi'])
-
+                        sources=['py3dcnx.c', 'py3dcnx_hidapi.c',
+                                 'hidapi/hid-win.c'],
+                        libraries=['setupapi'])
 
 setup(name='Py3Dcnx',
       version='1.0',
