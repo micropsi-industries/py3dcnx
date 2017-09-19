@@ -5,25 +5,23 @@
 
 static py3dcnx_context* ctx = NULL;
 
-static PyObject* test(PyObject* self)
-{
-  printf("Python%d test passed!\n",PY_MAJOR_VERSION);
-  Py_RETURN_NONE;
-}
-
-static PyObject* get_event(PyObject* self)
+static PyObject* get_event(PyObject* self, PyObject* args)
 {
   PyObject* ret;
+  int device_num = 0;
 
+  if(!PyArg_ParseTuple(args, "|i", &device_num))
+    return NULL;
+    
   if(!ctx){
-    return Py_None;
+    Py_RETURN_NONE;
   }
 
   py3dcnx_event* event = (py3dcnx_event*)malloc(sizeof(py3dcnx_event));
   if(!event)
-    return Py_None;
+    Py_RETURN_NONE;
 
-  py3dcnx_get_event(ctx, event);
+  py3dcnx_get_event(ctx, event, device_num);
 
   int16_t params[3];
   for(int i=0;i<3;i++)
@@ -43,7 +41,7 @@ static PyObject* get_event(PyObject* self)
       break;
     default:
       free(event);
-      return Py_None;
+      Py_RETURN_NONE;
   }
 
   free(event);
@@ -52,7 +50,6 @@ static PyObject* get_event(PyObject* self)
 
 static PyMethodDef py3dcnx_methods[] = {
   {"get_event", (PyCFunction)get_event, METH_VARARGS, NULL},
-  {"test", (PyCFunction)test, METH_VARARGS, NULL},
   {NULL, NULL, 0, NULL}
 };
 
