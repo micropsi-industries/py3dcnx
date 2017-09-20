@@ -96,7 +96,7 @@ PyMODINIT_FUNC PyInit__py3dcnx(void)
 }
 #else
 PyMODINIT_FUNC
-initpy3dcnx(void)
+init_py3dcnx(void)
 {
   py3dcnx_init();
   Py_InitModule("py3dcnx", py3dcnx_methods);
