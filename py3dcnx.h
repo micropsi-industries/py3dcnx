@@ -2,6 +2,7 @@
 #define _PY3DCNX_H_
 
 #include "hidapi/hidapi.h"
+#include <Python.h>
 #include <stdint.h>
 
 typedef enum {TRANSLATION=1, ROTATION, BUTTON} py3dcnx_event_type;
@@ -13,6 +14,7 @@ typedef enum {TRANSLATION=1, ROTATION, BUTTON} py3dcnx_event_type;
 typedef struct Py3Dcnx_dev{
   hid_device *dev;
   char path[MAX_PATH_LEN];
+  PyObject* handlers[2];
   struct Py3Dcnx_dev *next;
 } py3dcnx_device;
 

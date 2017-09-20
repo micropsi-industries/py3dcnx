@@ -12,7 +12,7 @@ static PyObject* get_event(PyObject* self, PyObject* args)
 
   if(!PyArg_ParseTuple(args, "|i", &device_num))
     return NULL;
-    
+
   if(!ctx){
     Py_RETURN_NONE;
   }
@@ -48,8 +48,41 @@ static PyObject* get_event(PyObject* self, PyObject* args)
   return ret;
 }
 
+static PyObject* get_devices(PyObject* self)
+{
+  PyObject* ret = PyList_New(0);
+  if(!ctx)
+    return ret;
+
+  py3dcnx_device *tmp = ctx->head;
+  while(tmp) {
+    PyList_Append(ret, Py_BuildValue("s",tmp->path));
+    tmp = tmp->next;
+  }
+  return ret;
+}
+
+static PyObject* register_handler(PyObject* self, PyObject* args)
+{
+  PyObject *handler;
+  int device_num = 0;
+  char *evtype = NULL;
+
+  if(PyArg_ParseTuple(args,"O|is", &handler, &device_num, &evtype)) {
+    if(!PyCallable_Check(handler)) {
+      PyErr_SetString(PyExc_TypeError, "first parameter must be callable");
+      return NULL;
+    }
+    Py_INCREF(handler);
+
+  }
+  Py_RETURN_NONE;
+}
+
 static PyMethodDef py3dcnx_methods[] = {
   {"get_event", (PyCFunction)get_event, METH_VARARGS, NULL},
+  {"get_devices", (PyCFunction)get_devices, METH_NOARGS, NULL},
+  {"register_handler", (PyCFunction)register_handler, METH_VARARGS, NULL},
   {NULL, NULL, 0, NULL}
 };
 
@@ -68,13 +101,13 @@ static void py3dcnx_init(void)
 static struct PyModuleDef py3dcnx =
 {
   PyModuleDef_HEAD_INIT,
-  "py3dcnx",
+  "_py3dcnx",
   "",
   -1,
   py3dcnx_methods
 };
 
-PyMODINIT_FUNC PyInit_py3dcnx(void)
+PyMODINIT_FUNC PyInit__py3dcnx(void)
 {
   py3dcnx_init();
   return PyModule_Create(&py3dcnx);

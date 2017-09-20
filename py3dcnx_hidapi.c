@@ -95,7 +95,8 @@ void py3dcnx_get_event(py3dcnx_context* ctx, py3dcnx_event* event, uint8_t devnu
   }
 
   if(!cur->dev)
-    py3dcnx_device_open(cur);
+    if(py3dcnx_device_open(cur))
+      return;
 
   hid_read(cur->dev, buf,8);
 
