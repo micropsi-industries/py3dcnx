@@ -24,10 +24,19 @@ Event dictionaries contain the information about their type and the correspondin
 There are 3 types of supported events:
 * **button** - data field (**val**) contains the bitmap of currently
 pressed buttons in the lowest 2 bits.
+```
+{'val': 2, 'type': 'button'}
+```
 * **translate** - data fields (**x**, **y** and **z**) contain 3-axis movement
 values
+```
+{'z': 54, 'y': 11, 'type': 'translate', 'x': -20}
+```
 * **rotate** - data fields (**roll**, **pitch** and **yaw**) explain rotation
 around axises x, y and z, respectively.
+```
+{'yaw': -10, 'roll': 9, 'pitch': 104, 'type': 'rotate'}
+```
 
 ### get_devices()
 Returns a list of 3dconnexion SpaceNavigators connected to the system,
