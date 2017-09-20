@@ -1,6 +1,8 @@
 import _py3dcnx
 from threading import Thread
 
+event_types = ['button', 'rotate', 'translate']
+
 
 class SpaceMouse:
     def __init__(self, num=0):
@@ -19,9 +21,12 @@ class SpaceMouse:
             if event['type'] in self.handlers.keys():
                 self.handlers[event['type']](event)
 
-    def register_handler(self, handler, event="all"):
-        self.handlers[event] = handler
-        return
+    def register_handler(self, handler, event='all'):
+        if event is 'all':
+            for e in event_types:
+                self.handlers[e] = handler
+        elif event in event_types:
+            self.handlers[event] = handler
 
     def get_devices(self):
         return _py3dcnx.get_devices()

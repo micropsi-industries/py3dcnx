@@ -6,4 +6,4 @@ def button(event):
 
 
 sm = SpaceMouse()
-sm.register_handler(button, "button")
+sm.register_handler(button, "all")

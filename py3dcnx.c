@@ -62,27 +62,9 @@ static PyObject* get_devices(PyObject* self)
   return ret;
 }
 
-static PyObject* register_handler(PyObject* self, PyObject* args)
-{
-  PyObject *handler;
-  int device_num = 0;
-  char *evtype = NULL;
-
-  if(PyArg_ParseTuple(args,"O|is", &handler, &device_num, &evtype)) {
-    if(!PyCallable_Check(handler)) {
-      PyErr_SetString(PyExc_TypeError, "first parameter must be callable");
-      return NULL;
-    }
-    Py_INCREF(handler);
-
-  }
-  Py_RETURN_NONE;
-}
-
 static PyMethodDef py3dcnx_methods[] = {
   {"get_event", (PyCFunction)get_event, METH_VARARGS, NULL},
   {"get_devices", (PyCFunction)get_devices, METH_NOARGS, NULL},
-  {"register_handler", (PyCFunction)register_handler, METH_VARARGS, NULL},
   {NULL, NULL, 0, NULL}
 };
 
