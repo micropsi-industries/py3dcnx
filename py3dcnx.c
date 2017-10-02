@@ -21,7 +21,11 @@ static PyObject* get_event(PyObject* self, PyObject* args)
   if(!event)
     Py_RETURN_NONE;
 
+  Py_BEGIN_ALLOW_THREADS
+
   py3dcnx_get_event(ctx, event, device_num);
+
+  Py_END_ALLOW_THREADS
 
   int16_t params[3];
   for(int i=0;i<3;i++)
