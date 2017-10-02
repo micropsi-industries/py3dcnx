@@ -24,7 +24,7 @@ typedef struct {
 
 typedef struct {
   py3dcnx_event_type type;
-  char values[6];
+  unsigned char values[6];
 } py3dcnx_event;
 
 py3dcnx_context* py3dcnx_init_hidapi(void);
