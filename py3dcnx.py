@@ -16,6 +16,11 @@ class SpaceMouse:
         self.thread = threading.Thread(target=self.event_loop_thread, args=(self.num,))
         self.thread.start()
 
+    def shutdown(self):
+    	self.end = True
+        self.thread.join(1)
+    	self.handlers.clear()
+
     def event_loop_thread(self, num):
         while not self.end:
             event = _py3dcnx.get_event(self.num)
