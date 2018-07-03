@@ -23,6 +23,7 @@ class SpaceMouse:
                 print("Cannot read from the space mouse\n")
                 return
             if event['type'] in self.handlers.keys():
+                print("Event " + event['type'])
                 self.handlers[event['type']](event)
 
     def register_handler(self, handler, event='all', data=None):

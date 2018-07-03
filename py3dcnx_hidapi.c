@@ -103,4 +103,6 @@ void py3dcnx_get_event(py3dcnx_context* ctx, py3dcnx_event* event, uint8_t devnu
   event->type = buf[0];
   for(int i=1;i<7;i++)
     event->values[i-1] = buf[i];
+
+  printf("Event type %x, param %x\n", buf[0], buf[1]);
 }
