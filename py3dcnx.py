@@ -7,6 +7,8 @@ event_types = ['button', 'rotate', 'translate']
 class SpaceMouse:
     def __init__(self, num=0):
         self.handlers = dict()
+        for e in event_types:
+            self.handlers[e] = self.dummy_handler
         self.num = num
         self.end = False
         self.start()
@@ -23,7 +25,6 @@ class SpaceMouse:
                 print("Cannot read from the space mouse\n")
                 return
             if event['type'] in self.handlers.keys():
-                print("Event " + event['type'])
                 self.handlers[event['type']](event)
 
     def register_handler(self, handler, event='all', data=None):
@@ -35,6 +36,9 @@ class SpaceMouse:
         elif event in event_types:
             self.handlers[event] = handler
         self.start()
+
+    def dummy_handler(self, event):
+        print("Dummy handler for event %s" % event)
 
     def get_devices(self):
         return _py3dcnx.get_devices()
