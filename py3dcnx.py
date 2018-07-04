@@ -5,6 +5,7 @@ event_types = ['button', 'rotate', 'translate']
 
 
 class SpaceMouse:
+
     def __init__(self, num=0):
         self.handlers = dict()
         self.num = num
@@ -35,9 +36,6 @@ class SpaceMouse:
             self.handlers[event] = handler
         self.start()
 
-    def get_devices(self):
-        return _py3dcnx.get_devices()
-
     def get_event(self):
         return _py3dcnx.get_event(self.num)
 
@@ -45,3 +43,7 @@ class SpaceMouse:
         self.end = True
         self.thread.join(1)
         self.handlers.clear()
+
+    @staticmethod
+    def get_devices():
+        return _py3dcnx.get_devices()
