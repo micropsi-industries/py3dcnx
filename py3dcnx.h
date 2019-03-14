@@ -30,6 +30,6 @@ typedef struct {
 py3dcnx_context* py3dcnx_init_hidapi(void);
 void py3dcnx_deinit_hidapi(py3dcnx_context* ctx);
 
-void py3dcnx_get_event(py3dcnx_context* ctx, py3dcnx_event* event, uint8_t devnum);
+void py3dcnx_get_event(py3dcnx_context* ctx, py3dcnx_event* event, uint8_t devnum, int timeout);
 
 #endif

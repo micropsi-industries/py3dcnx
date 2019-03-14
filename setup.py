@@ -19,6 +19,6 @@ elif 'win' in platform:
                         libraries=['setupapi'])
 
 setup(name='Py3Dcnx',
-      version='1.0',
+      version='1.1',
       description='Python module for interfacing 3Dconnexion mice',
       ext_modules=[module1], py_modules=['py3dcnx'])

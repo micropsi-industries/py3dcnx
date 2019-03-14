@@ -45,6 +45,6 @@ and their paths. Linux example:
 ['/dev/hidraw2', '/dev/hidraw3']
 ```
 
-### get_event()
-Blocking call, with an optional device number as a parameter. Waits for the
-event and returns an event dictionary.
+### get_event([device_numer [, timeout]])
+Returns an event from the spacemouse, or `None` after a timeout.
+Optionally takes a device_number for identification and a value for the timeout. A timeout of `-1` makes this call blocking until the next event occurs.

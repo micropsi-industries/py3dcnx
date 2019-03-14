@@ -9,8 +9,9 @@ static PyObject* get_event(PyObject* self, PyObject* args)
 {
   PyObject* ret;
   int device_num = 0;
+  int timeout = 100;
 
-  if(!PyArg_ParseTuple(args, "|i", &device_num))
+  if(!PyArg_ParseTuple(args, "|ii", &device_num, &timeout))
     return NULL;
 
   if(!ctx){
@@ -23,7 +24,7 @@ static PyObject* get_event(PyObject* self, PyObject* args)
 
   Py_BEGIN_ALLOW_THREADS
 
-  py3dcnx_get_event(ctx, event, device_num);
+  py3dcnx_get_event(ctx, event, device_num, timeout);
 
   Py_END_ALLOW_THREADS
 

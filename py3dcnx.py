@@ -10,6 +10,7 @@ class SpaceMouse:
         self.handlers = dict()
         self.num = num
         self.end = False
+        self.read_timeout = 100
         self.start()
 
     def start(self):
@@ -19,11 +20,8 @@ class SpaceMouse:
 
     def event_loop_thread(self, num):
         while not self.end:
-            event = _py3dcnx.get_event(self.num)
-            if event is None:
-                print("Cannot read from the space mouse\n")
-                return
-            if event['type'] in self.handlers.keys():
+            event = _py3dcnx.get_event(self.num, self.read_timeout)
+            if event and event['type'] in self.handlers.keys():
                 self.handlers[event['type']](event)
 
     def register_handler(self, handler, event='all', data=None):

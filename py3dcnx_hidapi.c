@@ -80,7 +80,7 @@ void py3dcnx_deinit_hidapi(py3dcnx_context* ctx)
   }
 }
 
-void py3dcnx_get_event(py3dcnx_context* ctx, py3dcnx_event* event, uint8_t devnum)
+void py3dcnx_get_event(py3dcnx_context* ctx, py3dcnx_event* event, uint8_t devnum, int timeout)
 {
   uint8_t buf[8];
   py3dcnx_device *cur = ctx->head;
@@ -98,7 +98,7 @@ void py3dcnx_get_event(py3dcnx_context* ctx, py3dcnx_event* event, uint8_t devnu
     if(py3dcnx_device_open(cur))
       return;
 
-  hid_read(cur->dev, buf,8);
+  hid_read_timeout(cur->dev, buf, 8, timeout);
 
   event->type = buf[0];
   for(int i=1;i<7;i++)
