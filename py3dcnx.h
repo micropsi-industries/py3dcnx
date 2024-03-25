@@ -9,7 +9,7 @@ typedef enum {TRANSLATION=1, ROTATION, BUTTON} py3dcnx_event_type;
 
 #define MAX_PATH_LEN  255
 #define USB_VID   0x46d
-#define USB_PID   0xc626
+#define USB_PID   0xc635
 
 typedef struct Py3Dcnx_dev{
   hid_device *dev;

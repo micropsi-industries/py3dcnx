@@ -24,4 +24,5 @@ class Listener():
 
 ls = Listener()
 sm = SpaceMouse()
+print("devices found: ", SpaceMouse.get_devices())
 sm.register_handler(ls.button, "button")
