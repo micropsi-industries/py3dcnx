@@ -1,6 +1,6 @@
 # Py3Dcnx
 A Python module that provides cross-platform access to 3dconnexion
-SpaceNavigator
+SpaceMouse Compact
 
 ### Usage
 * Import the SpaceMouse class from the package
